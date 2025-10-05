@@ -2,12 +2,15 @@ package com.recipe.sriharish.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 import com.recipe.sriharish.model.Chef;
 
 @Repository
 public interface ChefRepository extends JpaRepository<Chef, Integer> {
     // Custom method for login
     Chef findByUsernameAndPassword(String username, String password);
+    Chef findByUsername(String username);
+
 }
 
 

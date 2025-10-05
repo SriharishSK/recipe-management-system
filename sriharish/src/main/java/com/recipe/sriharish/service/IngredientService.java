@@ -1,10 +1,12 @@
 package com.recipe.sriharish.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.recipe.sriharish.dao.IngredientRepository;
 import com.recipe.sriharish.model.Ingredient;
-import java.util.List;
 
 @Service
 public class IngredientService {
@@ -13,9 +15,12 @@ public class IngredientService {
     private IngredientRepository ingredientRepository;
 
     // Add new ingredient
-    public Ingredient addIngredient(Ingredient ingredient) {
-        return ingredientRepository.save(ingredient);
-    }
+    
+
+    public List<Ingredient> addAllIngredients(List<Ingredient> ingredients) {
+    return ingredientRepository.saveAll(ingredients);
+}
+
 
     // Get all ingredients
     public List<Ingredient> getAllIngredients() {

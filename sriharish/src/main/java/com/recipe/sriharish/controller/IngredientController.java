@@ -1,10 +1,19 @@
 package com.recipe.sriharish.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.recipe.sriharish.model.Ingredient;
 import com.recipe.sriharish.service.IngredientService;
-import java.util.List;
 
 @RestController
 @RequestMapping("/ingredients")  // Base URL for ingredients
@@ -14,10 +23,11 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     // Add new ingredient
-    @PostMapping("/add")
-    public Ingredient addIngredient(@RequestBody Ingredient ingredient) {
-        return ingredientService.addIngredient(ingredient);
-    }
+   
+@PostMapping("/add")
+public List<Ingredient> addIngredients(@RequestBody List<Ingredient> ingredients) {
+    return ingredientService.addAllIngredients(ingredients);
+}
 
     // Get all ingredients
     @GetMapping

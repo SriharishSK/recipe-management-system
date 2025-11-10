@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recipe.sriharish.dao.IngredientRepository;
+import com.recipe.sriharish.dao.RecipeRepository;
 import com.recipe.sriharish.model.Ingredient;
+import com.recipe.sriharish.model.Recipe;
 
 @Service
 public class IngredientService {
@@ -14,8 +16,21 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeRepository recipeRepository;
+
+
     // Add new ingredient
-    
+    public Ingredient addIngredientToRecipe(Integer recipeId, String name, String quantity) {
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(name);
+        ingredient.setQuantity(quantity);
+        ingredient.setRecipe(recipe);
+        return ingredientRepository.save(ingredient);
+    }
 
     public List<Ingredient> addAllIngredients(List<Ingredient> ingredients) {
     return ingredientRepository.saveAll(ingredients);
@@ -45,5 +60,7 @@ public class IngredientService {
     public void deleteIngredient(int id) {
         ingredientRepository.deleteById(id);
     }
+
+     
 }
 

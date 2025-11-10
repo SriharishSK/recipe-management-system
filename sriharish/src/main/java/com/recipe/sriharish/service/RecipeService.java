@@ -3,6 +3,7 @@ package com.recipe.sriharish.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.recipe.sriharish.dao.RecipeRepository;
+import com.recipe.sriharish.model.Chef;
 import com.recipe.sriharish.model.Recipe;
 import com.recipe.sriharish.model.RecipeIngredient;
 import java.util.List;
@@ -57,5 +58,20 @@ public class RecipeService {
     // Delete recipe
     public void deleteRecipe(int id) {
         recipeRepository.deleteById(id);
+    }
+
+
+
+
+     public void saveRecipe(Recipe recipe) {
+        recipeRepository.save(recipe);
+    }
+
+    public void deleteRecipe(Integer id) {
+        recipeRepository.deleteById(id);
+    }
+
+    public List<Recipe> getRecipesByChef(Chef chef) {
+        return recipeRepository.findByChef(chef);
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.recipe.sriharish.model.Chef;
 import com.recipe.sriharish.model.Recipe;
 
 @Repository
@@ -15,7 +16,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     // Optional: find by name
     Recipe findByName(String name);
-
+ List<Recipe> findByChef(Chef chef);
 
 }
 //==============WITHOUT SPRING==================//

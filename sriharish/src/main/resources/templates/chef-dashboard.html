@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chef Dashboard</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Welcome, <span th:text="${chef.username}"></span> 👨‍🍳</h2>
+
+    <h3>Add New Recipe</h3>
+    <form th:action="@{/chef/add-recipe}" method="post">
+        <label>Recipe Name:</label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Instructions:</label>
+        <textarea name="instructions" required></textarea><br><br>
+
+        <button type="submit">Add Recipe</button>
+    </form>
+
+    <hr>
+
+    <h3>Your Recipes</h3>
+    <div th:each="recipe : ${recipes}">
+        <h4 th:text="${recipe.name}"></h4>
+        <p><b>Instructions:</b> <span th:text="${recipe.instructions}"></span></p>
+
+        <h5>Ingredients:</h5>
+        <ul>
+            <li th:each="ing : ${recipe.ingredients}">
+                <span th:text="${ing.name}"></span> - <span th:text="${ing.quantity}"></span>
+            </li>
+        </ul>
+
+        <!-- Add Ingredient form -->
+        <form th:action="@{'/chef/add-ingredient/' + ${recipe.id}}" method="post">
+            <input type="text" name="name" placeholder="Ingredient name" required>
+            <input type="text" name="quantity" placeholder="Quantity" required>
+            <button type="submit">Add Ingredient</button>
+        </form>
+
+        <!-- Delete Recipe -->
+        <form th:action="@{'/chef/delete-recipe/' + ${recipe.id}}" method="post">
+            <button type="submit">Delete Recipe</button>
+        </form>
+        <hr>
+    </div>
+</body>
+</html>

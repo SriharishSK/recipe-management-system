@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chef Login</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>Chef Login 👨‍🍳</h2>
+  <form th:action="@{/chef/login}" method="post">
+    <label>Username:</label>
+    <input type="text" name="username" required><br><br>
+    <label>Password:</label>
+    <input type="password" name="password" required><br><br>
+    <button type="submit">Login</button>
+  </form>
+  <a th:href="@{/register}">New Chef? Register Here</a>
+
+   <div th:if="${error}" style="color:red; font-weight:bold;">
+      <p th:text="${error}"></p>
+  </div>
+  
+</body>
+</html>

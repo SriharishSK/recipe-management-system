@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chef Registration</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h2>Register as Chef 👩‍🍳</h2>
+  <form th:action="@{/chef/register}" method="post">
+    <label>Username:</label>
+    <input type="text" name="username" required><br><br>
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+    <label>Password:</label>
+    <input type="password" name="password" required><br><br>
+    <button type="submit">Register</button>
+  </form>
+  <a th:href="@{/login}">Already registered? Login</a>
+
+  <div th:if="${success}" style="color:green; font-weight:bold;">
+    <p th:text="${success}"></p>
+  </div>
+    <div th:if="${error}" style="color:red; font-weight:bold;">
+        <p th:text="${error}"></p>
+</body>
+</html>

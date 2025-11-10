@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -20,10 +22,13 @@ public class Ingredient {
     @Column(nullable = false, unique = true, length = 20)
     private String name;
 
-    // Relationship with RecipeIngredient
-    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeIngredient> recipeIngredients;
+    @Column(nullable = false, length = 50)
+    private String quantity;  // ✅ new field
 
+     // ✅ Each ingredient belongs to one recipe
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
     // Constructors
     public Ingredient() {}
 
@@ -38,7 +43,14 @@ public class Ingredient {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public List<RecipeIngredient> getRecipeIngredients() { return recipeIngredients; }
-    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) { this.recipeIngredients = recipeIngredients; }
+    public Recipe getRecipe() { return recipe; }
+    public void setRecipe(Recipe recipe) { this.recipe = recipe; }
+
+    public String getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 }
 
